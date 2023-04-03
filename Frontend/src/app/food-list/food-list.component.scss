@@ -1,3 +1,10 @@
+.card{
+  width: 89%;
+  margin: auto;
+  margin-top: 1em;
+}
+
+
 .card-container {
     display: flex;
     flex-wrap: wrap;
@@ -29,13 +36,14 @@
   
   .card-price {
     font-weight: bold;
+    text-align: center;
   }
   
   .card-body {
     padding: 10px;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: right;
   }
 
   .card-img-top {

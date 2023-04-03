@@ -1,25 +1,37 @@
-
-
-<div class="card">
-  <div class="card-header">Cart Items</div>
-  <div class="card-body">
-    <div *ngFor="let item of cartItems; let i = index" class="cart-item">
-      <div class="cart-item-name">{{ item.name }}</div>
-      <div class="cart-item-price">{{ item.price | currency }}</div>
-      <div class="cart-item-quantity">
-        <button (click)="item.quantity = item.quantity - 1">-</button>
-        <span>{{ item.quantity }}</span>
-        <button (click)="item.quantity = item.quantity + 1">+</button>
-      </div>
-      <div class="cart-item-total">{{ (item.price * item.quantity) | currency }}</div>
-      <button (click)="removeItem(i)">Remove</button>
-    </div>
-    
-    <div class="cart-total">
-      <div>Total: {{ totalPrice | currency }}</div>
-      <button (click)="clearCart()">Clear Cart</button>
-      <button class="btn btn-primary" (click)="checkoutCart()">Checkout</button>
-    </div>
+<div class="container mt-5">
+  <h1>Cart</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Product</th>
+        <th scope="col">Price</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Total</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of cartItems; let i = index">
+        <th scope="row">{{ i + 1 }}</th>
+        <td>{{ item.name }}</td>
+        <td>{{ item.price }}</td>
+        <td>
+          <button class="btn btn-secondary" (click)="item.quantity = item.quantity - 1" [disabled]="item.quantity === 1">
+            -
+          </button>
+          {{ item.quantity }}
+          <button class="btn btn-secondary" (click)="item.quantity = item.quantity + 1">+</button>
+        </td>
+        <td>{{ item.price * item.quantity }}</td>
+        <td>
+          <button class="btn btn-danger" (click)="removeItem(i)">Remove</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="text-center mt-5">
+    <button class="btn btn-secondary me-3" (click)="clearCart()">Clear Cart</button>
+    <button class="btn btn-primary" (click)="checkout()">Checkout</button>
   </div>
 </div>
-

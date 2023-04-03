@@ -7,6 +7,10 @@ import { FoodListComponent } from './food-list/food-list.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HttpClientModule } from '@angular/common/http';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import {MatButtonModule} from '@angular/material/button'
+import {MatCard, MatCardTitle, MatCardContent} from '@angular/material/card'
+import {MatList, MatListItem} from '@angular/material/list'
 
 @NgModule({
   declarations: [
@@ -18,7 +22,9 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    NoopAnimationsModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
