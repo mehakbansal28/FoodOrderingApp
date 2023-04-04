@@ -12,9 +12,9 @@ import { FoodService } from '../shared/services/food.service';
 export class FoodListComponent implements OnInit {
 
   foodList: FoodItem[] = [
-    { id: 1, name: "Pizza", description: "Delicious pizza with all your favorite toppings!", price: 9.99,  imageUrl: 'pizza.jpg' },
-    { id: 2, name: "Burger", description: "Juicy burger with all the fixings!", price: 6.99 ,  imageUrl: 'pizza.jpg'},
-    { id: 3, name: "Fries", description: "Crispy fries with your choice of dipping sauce.", price: 3.99,  imageUrl: 'pizza.jpg' }
+    { id: 1, name: "Pizza", description: "Delicious pizza with all your favorite toppings!", price: 9.99,  imageUrl: '/assets/pizza.jpg' },
+    { id: 2, name: "Burger", description: "Juicy burger with all the fixings!", price: 6.99 ,  imageUrl: '../assets/burger.jpg'},
+    { id: 3, name: "Fries", description: "Crispy fries with your choice of dipping sauce.", price: 3.99,  imageUrl: '../assets/fries.jpg' }
   ];
   cartItems: CartItem[] = [];
   foodItems: FoodItem[] = [];
@@ -32,14 +32,8 @@ export class FoodListComponent implements OnInit {
     if (existingItem) {
       existingItem.quantity += 1;
     } else {
-      const newItem: any = {
-        id: item.id,
-        name: item.name,
-        price: item.price,
-        quantity: 1,
-      //  foodItem: []
-      };
-      this.cartItems.push(newItem);
+      const newItem = new CartItem(item.id, item.name, item.price, 1, item.imageUrl); // Pass the imageUrl property here
+    this.cartItems.push(newItem)
     }
     localStorage.setItem('cartItems', JSON.stringify(this.cartItems));
     window.alert("Items added to cart successfully");
