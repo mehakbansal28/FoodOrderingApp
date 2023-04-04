@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { CartItem } from '../models/cart-item.model';
 import { FoodItem } from '../models/food-item.model';
 import { FoodService } from './food.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,8 @@ export class CartService {
   cartItems: CartItem[] = [];
   private apiUrl = 'http://localhost:3000';
 
-  constructor(private foodService: FoodService, private http: HttpClient) { }
+  constructor(private foodService: FoodService, private http: HttpClient , private router: Router) { }
+  
 
   // addToCart(item: CartItem) {
   //   const existingItem = this.items.find(i => i.foodItem.id === item.foodItem.id);
@@ -83,7 +85,8 @@ export class CartService {
     this.http.post('http://localhost:3000/checkout', order).subscribe((response: any) => {
       if (response.success) {
         // Order was successful, display the order ID to the user
-        alert(`Your order was successful! Your order ID is ${response.orderId}.`);
+        // alert(`Your order was successful! Your order ID is ${response.orderId}.`);
+        this.router.navigate(['/order-confirmation'], { state: { orderId: response.orderId }});
 
       } else {
         // There was an error processing the order
