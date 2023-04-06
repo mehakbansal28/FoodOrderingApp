@@ -4,7 +4,7 @@
 [chatboxIsOpen]="chatboxIsOpen" (close)="chatboxIsOpen = false"></app-chatbot>
  <app-speech-recognition></app-speech-recognition>
 <router-outlet></router-outlet> -->
-<!-- <app-speech-recognition></app-speech-recognition> -->
+<app-speech-recognition></app-speech-recognition>
 
 <body>
   <div>
@@ -17,11 +17,12 @@
       <div class="message" [ngClass]="{ 'from': message.author === 'bot',
       'to': message.author === 'user' }">
         <span> {{ message.content }} </span>
+        <!-- <p>{{voiceService.text}}</p> -->
       </div>
     </ng-container>
     <input [(ngModel)]="value" (keyup.enter)="sendMessage()" type="text" placeholder="type here">
     <button (click)="sendMessage()">Send</button>
-    <button (click)="startService()">Start</button>
-    <button (click)="stopService()">Stop</button>
+    <!-- <button (click)="startService()">Start</button>
+    <button (click)="stopService()">Stop</button> -->
   </div>
 </body>

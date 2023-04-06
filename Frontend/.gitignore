@@ -1,17 +1,18 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
+ 
+
 # compiled output
 /dist
 /tmp
 /out-tsc
-# Only exists if Bazel was run
-/bazel-out
+
+ 
 
 # dependencies
 /node_modules
 
-# profiling files
-chrome-profiler-events*.json
+ 
 
 # IDEs and editors
 /.idea
@@ -21,6 +22,9 @@ chrome-profiler-events*.json
 *.launch
 .settings/
 *.sublime-workspace
+.vscode
+
+ 
 
 # IDE - VSCode
 .vscode/*
@@ -28,7 +32,8 @@ chrome-profiler-events*.json
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
-.history/*
+
+ 
 
 # misc
 /.sass-cache
@@ -40,6 +45,14 @@ yarn-error.log
 testem.log
 /typings
 
+ 
+
 # System Files
 .DS_Store
 Thumbs.db
+package-lock.json
+
+ 
+
+# test
+test-results.xml
