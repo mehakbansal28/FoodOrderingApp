@@ -1,0 +1,27 @@
+<app-navbar></app-navbar>
+<!--<button (click)="toggleChatbox()">Toggle chatbox</button>
+<app-chatbot *ngIf="chatboxIsOpen"
+[chatboxIsOpen]="chatboxIsOpen" (close)="chatboxIsOpen = false"></app-chatbot>
+ <app-speech-recognition></app-speech-recognition>
+<router-outlet></router-outlet> -->
+<!-- <app-speech-recognition></app-speech-recognition> -->
+
+<body>
+  <div>
+    <button (click)="openChatBot()" class="click-button"
+      [ngStyle]="{'background-color':!chatFlag? '#9b4dca' : '#363636' }">Chat</button>
+  </div>
+  <div *ngIf="chatFlag" class="chatbox">
+    <h4>Welcome User! How May I help You! </h4>
+    <ng-container *ngFor="let message of messages">
+      <div class="message" [ngClass]="{ 'from': message.author === 'bot',
+      'to': message.author === 'user' }">
+        <span> {{ message.content }} </span>
+      </div>
+    </ng-container>
+    <input [(ngModel)]="value" (keyup.enter)="sendMessage()" type="text" placeholder="type here">
+    <button (click)="sendMessage()">Send</button>
+    <button (click)="startService()">Start</button>
+    <button (click)="stopService()">Stop</button>
+  </div>
+</body>

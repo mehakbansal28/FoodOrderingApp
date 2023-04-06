@@ -1,0 +1,59 @@
+<!-- <div>
+    <h1>Food Ordering Chatbot</h1>
+    <div *ngFor="let message of conversation">
+      {{ message }}
+    </div>
+    <div>
+      <input type="text" [(ngModel)]="inputText" placeholder="Type your message here...">
+      <button (click)="sendMessage()">Send</button>
+    </div>
+  </div> -->
+
+
+<!-- <div class="chatbot-container">
+    <div class="chatbot-messages">
+      <div *ngFor="let msg of message">
+        <div class="message {{msg}}">
+          <div class="message-text">{{msg}}</div>
+        </div>
+      </div>
+    </div>
+    <div class="chatbot-input"> -->
+<!-- <input type="text" [(ngModel)]="message" (keydown.enter)="sendMessage()"> -->
+<!-- <input type="text" [(ngModel)]="message" placeholder="Type your message here...">
+      <button (click)="sendMessage()">Send</button>
+    </div>
+  </div> -->
+
+<!-- working -->
+
+<!-- <div class="chat-container">
+    <div class="chat-messages">
+    </div>
+    <form class="chat-form" (ngSubmit)="sendMessage()">
+      <input type="text" [(ngModel)]="message" placeholder="Type your message...">
+      <button type="submit">Send</button>
+      <div class="message" *ngIf="chatbotResponse">
+        <p class="message-content">{{ chatbotResponse }}</p>
+      </div>
+    </form>
+    <div  *ngIf="chatboxIsOpen">
+    <button class="chat-close" (click)="closeChat()">X</button>
+</div>
+  </div> -->
+
+
+<!-- slackblitz attempt -->
+<h1>JSExpert Angular Chat Bot</h1>
+<ng-container *ngFor="let message of messages">
+  <div class="message" [ngClass]="{ 'from': message.author === 'bot',
+'to': message.author === 'user' }">
+    {{ message.content }}
+  </div>
+</ng-container>
+<label *ngIf="messages.length == 0; else dialogInfo" for="nameField">Your message</label>
+<input [(ngModel)]="value" (keyup.enter)="sendMessage()" type="text">
+<button (click)="sendMessage()">Send</button>
+<ng-template #dialogInfo>
+  <span [className]="'float-right'">Total messages: {{messages.length}}</span>
+</ng-template>

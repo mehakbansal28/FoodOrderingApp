@@ -1,0 +1,25 @@
+
+
+<div class="card">
+  <div class="card-header">Cart Items</div>
+  <div class="card-body">
+    <div *ngFor="let item of cartItems; let i = index" class="cart-item">
+      <div class="cart-item-name">{{ item.name }}</div>
+      <div class="cart-item-price">{{ item.price | currency }}</div>
+      <div class="cart-item-quantity">
+        <button (click)="item.quantity = item.quantity - 1">-</button>
+        <span>{{ item.quantity }}</span>
+        <button (click)="item.quantity = item.quantity + 1">+</button>
+      </div>
+      <div class="cart-item-total">{{ (item.price * item.quantity) | currency }}</div>
+      <button (click)="removeItem(i)">Remove</button>
+    </div>
+    
+    <div class="cart-total">
+      <div>Total: {{ totalPrice | currency }}</div>
+      <button (click)="clearCart()">Clear Cart</button>
+      <button class="btn btn-primary" (click)="checkoutCart()">Checkout</button>
+    </div>
+  </div>
+</div>
+
