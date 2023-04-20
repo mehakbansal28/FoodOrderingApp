@@ -1,0 +1,42 @@
+name: Angular 12 Build
+on:
+  push:
+    branches:
+      - main
+      - actions-pipeline
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '16.x'
+
+    - name: Install Angular CLI
+      run: npm install -g @angular/cli@12
+
+    - name: Install Dependencies
+      run: npm install
+
+    - name: Interpolate environment variables
+      shell: bash
+      id: interpolate
+      run: |
+         pwd
+         ls -la
+         node -v
+         npm -v
+
+    - name: Build
+      #run: npm run build
+      run: npm run start
+
+    - name: Archive Build Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: dist
+        path: dist
