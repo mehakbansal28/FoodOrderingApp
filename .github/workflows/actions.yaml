@@ -22,9 +22,6 @@ jobs:
     - name: Install Dependencies
       run: npm install --prefix ./Frontend
 
-    # - name: Update Dependencies
-    #   run: ng update --all --force
-
     - name: Interpolate environment variables
       shell: bash
       id: interpolate
@@ -33,7 +30,10 @@ jobs:
          ls -la
          node -v
          npm -v
-         cd Frontend
+         cd /home/runner/work/_actions/
+         ls -la
+         cd /home/runner/work/_actions/FoodOrderingApp
+         ls -la 
 
     - name: Build
       #run: npm run build
