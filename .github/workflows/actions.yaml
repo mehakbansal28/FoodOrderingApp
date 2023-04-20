@@ -33,7 +33,7 @@ jobs:
 
     - name: Build
       #run: npm run build
-      run: npm run start
+      run: npm run build
 
     - name: Archive Build Artifact
       uses: actions/upload-artifact@v2
