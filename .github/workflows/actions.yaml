@@ -33,10 +33,11 @@ jobs:
          ls -la
          node -v
          npm -v
+         cd Frontend
 
     - name: Build
       #run: npm run build
-      run: npm run build
+      run: npm run start
 
 
 
