@@ -20,7 +20,7 @@ jobs:
       run: npm install -g @angular/cli@12
 
     - name: Install Dependencies
-      run: npm install --prefix ./Frontend
+      run: npm ci --prefix ./Frontend
 
     - name: Interpolate environment variables
       shell: bash
@@ -32,8 +32,8 @@ jobs:
          npm -v
          cd /home/runner/work/_actions/
          ls -la
-         cd /home/runner/work/_actions/FoodOrderingApp
-         ls -la 
+         # cd /home/runner/work/_actions/FoodOrderingApp
+         # ls -la
 
     - name: Build
       #run: npm run build
