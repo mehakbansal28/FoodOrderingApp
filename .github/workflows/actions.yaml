@@ -20,10 +20,10 @@ jobs:
       run: npm install -g @angular/cli@12
 
     - name: Install Dependencies
-      run: npm install
+      run: npm install --prefix ./Frontend
 
-    - name: Update Dependencies
-      run: ng update --all --force
+    # - name: Update Dependencies
+    #   run: ng update --all --force
 
     - name: Interpolate environment variables
       shell: bash
