@@ -6,7 +6,7 @@
     "test": "ng test --code-coverage --watch=false",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "serve-dev": "ng serve --baseHref=/foodordering/ui/",
+    "serve-dev": "ng serve --baseHref=/foodordering/ui/ --watch=false",
     "ngcc": "ngcc",
     "build": "ng test --code-coverage --watch=false && ng build --configuration production"
   },
