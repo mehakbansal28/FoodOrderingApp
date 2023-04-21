@@ -7,6 +7,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    container:
+      image: dorowu/ubuntu-desktop-lxde-vnc
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
