@@ -37,7 +37,7 @@ jobs:
 
     - name: Build
       #run: npm run build
-      run: npm run serve-dev --prefix /home/runner/work/FoodOrderingApp/FoodOrderingApp/Frontend  --watch=false
+      run: npm run serve-dev --prefix /home/runner/work/FoodOrderingApp/FoodOrderingApp/Frontend  --port 4200 --watch=false
 
     - name: Archive Build Artifact
       uses: actions/upload-artifact@v2
