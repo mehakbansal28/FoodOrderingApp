@@ -37,7 +37,7 @@ jobs:
 
     - name: Build
       #run: npm run build
-      run: npm run start --prefix /home/runner/work/FoodOrderingApp/FoodOrderingApp/Frontend
+      run: npm run serve-dev --prefix /home/runner/work/FoodOrderingApp/FoodOrderingApp/Frontend
 
     - name: Archive Build Artifact
       uses: actions/upload-artifact@v2
