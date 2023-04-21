@@ -24,18 +24,18 @@ jobs:
     - name: Install Dependencies
       run: npm i --prefix ./Frontend
 
-    - name: Interpolate environment variables
-      shell: bash
-      id: interpolate
-      run: |
-         pwd
-         ls -la
-         node -v
-         npm -v
-         cd /home/runner/work/_actions/
-         ls -la
-         # cd /home/runner/work/_actions/FoodOrderingApp
-         # ls -la
+    # - name: Interpolate environment variables
+    #   shell: bash
+    #   id: interpolate
+    #   run: |
+    #      pwd
+    #      ls -la
+    #      node -v
+    #      npm -v
+    #      cd /home/runner/work/_actions/
+    #      ls -la
+    #      # cd /home/runner/work/_actions/FoodOrderingApp
+    #      # ls -la
 
     - name: Build
       #run: npm run build
