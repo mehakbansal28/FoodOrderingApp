@@ -7,8 +7,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    container:
-      image: dorowu/ubuntu-desktop-lxde-vnc
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
@@ -34,7 +32,6 @@ jobs:
          ls -la
 
     - name: Build
-      #run: npm run build
       run: npm run build --prefix /home/runner/work/FoodOrderingApp/FoodOrderingApp/Frontend --watch=false
 
     - name: Archive Build Artifact
