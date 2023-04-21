@@ -32,7 +32,7 @@ jobs:
          ls -la
 
     - name: Build
-      run: npm run build --prefix /home/runner/work/FoodOrderingApp/FoodOrderingApp/Frontend --watch=false
+      run: npm run build --prefix /home/runner/work/FoodOrderingApp/FoodOrderingApp/Frontend 
 
     - name: Archive Build Artifact
       uses: actions/upload-artifact@v2
