@@ -78,7 +78,7 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-              "browserTarget": "food-ordering-app:build"
+            "browserTarget": "food-ordering-app:build"
            },
           "configurations": {
             "production": {
