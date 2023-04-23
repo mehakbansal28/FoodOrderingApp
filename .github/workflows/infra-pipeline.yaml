@@ -16,8 +16,8 @@ jobs:
       - name: Configure AWS role
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-region: us-east-1
-          role-to-assume: arn:aws:iam::475879525909:role/terraform-fe-role
+          aws-region: "us-east-1"
+          role-to-assume: "arn:aws:iam::475879525909:role/terraform-fe-role"
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
