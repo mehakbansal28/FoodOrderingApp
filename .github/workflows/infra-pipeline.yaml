@@ -3,7 +3,7 @@ on:
   push:
     branches:
       - main
-      - infra-pipeline.yaml
+      - infra-pipeline
 
 
 jobs:
