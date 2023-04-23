@@ -1,0 +1,35 @@
+on:
+  push:
+    branches:
+      - main
+      - infra-pipeline.yaml
+
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Configure AWS role
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-region: us-east-1
+          role-to-assume: arn:aws:iam::475879525909:role/terraform-fe-role
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: 1.0.0
+
+      - name: Initialize Terraform
+        run: terraform init ./infrastructure
+
+      - name: Plan Terraform
+        run: terraform plan ./infrastructure
+
+      - name: Apply Terraform
+        run: terraform apply ./infrastructure
+        env:
+          TF_bucket_name: "fe-angular"
