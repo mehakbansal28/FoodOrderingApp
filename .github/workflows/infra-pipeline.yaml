@@ -1,3 +1,4 @@
+name: ANGULAR:FE:INFRASTRUCTURE
 on:
   push:
     branches:
