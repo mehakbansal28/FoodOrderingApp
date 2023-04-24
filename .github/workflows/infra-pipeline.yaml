@@ -13,11 +13,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Install AWS CLI
-        uses: aws-actions/aws-cli@v2
-        with:
-          aws-version: '2'        
-
       - name: Interpolation
         shell: bash
         run: |
@@ -55,8 +50,6 @@ jobs:
           echo "region = us-east-1" >> ~/.aws/config
           echo "output = json" >> ~/.aws/config
           echo "source_profile = default-login" >> ~/.aws/config
-
-
 
       - name: Configure AWS role
         uses: aws-actions/configure-aws-credentials@v1
