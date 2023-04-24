@@ -19,22 +19,21 @@ jobs:
           version: 2
           verbose: false
 
-      - name: Interpolation
-        run: |
-          #
-          AWS_CLI_VERSION=$(aws --version 2>&1 | cut -d " " -f1 | cut -d "/" -f2)
-          echo AWS_CLI_VERSION
-          echo $AWS_CLI_VERSION
+      # - name: Interpolation
+      #   run: |
+      #     #
+      #     AWS_CLI_VERSION=$(aws --version 2>&1 | cut -d " " -f1 | cut -d "/" -f2)
+      #     echo $AWS_CLI_VERSION
+      #
+      #     #aws sts assume-role --role-arn arn:aws:iam::475879525909:role/terraform-fe-role --role-session-name automation > assume_role
+      #
+      #   shell: bash
 
-          #aws sts assume-role --role-arn arn:aws:iam::475879525909:role/terraform-fe-role --role-session-name automation > assume_role
-
-        shell: bash
-
-      - name: Configure AWS role
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-region: "us-east-1"
-          role-to-assume: "arn:aws:iam::475879525909:role/terraform-fe-role"
+      # - name: Configure AWS role
+      #   uses: aws-actions/configure-aws-credentials@v1
+      #   with:
+      #     aws-region: "us-east-1"
+      #     role-to-assume: "arn:aws:iam::475879525909:role/terraform-fe-role"
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
@@ -51,4 +50,7 @@ jobs:
         run: terraform apply ./infrastructure
         env:
           TF_VAR_bucket_name: fe-angular
-          TF_VAR_deployment_role: arn:aws:iam::475879525909:role/terraform-fe-role
+          #TF_VAR_deployment_role: arn:aws:iam::475879525909:role/terraform-fe-role
+          TF_VAR_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          TF_VAR_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          TF_VAR_aws_region: ap-southeast-1

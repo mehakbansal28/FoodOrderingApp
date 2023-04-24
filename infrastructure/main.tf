@@ -9,10 +9,9 @@ terraform {
 }
 
 provider "aws" {
-  region            = var.aws_region
-  assume_role {
-    role_arn        = var.deployment_role
-  }
+  access_key = "<YOUR_ACCESS_KEY>"
+  secret_key = "<YOUR_SECRET_KEY>"
+  region     = "<YOUR_AWS_REGION>"
   default_tags {
     tags = {
         Terraform   = "true"
