@@ -9,9 +9,9 @@ terraform {
 }
 
 provider "aws" {
-  access_key = "<YOUR_ACCESS_KEY>"
-  secret_key = "<YOUR_SECRET_KEY>"
-  region     = "<YOUR_AWS_REGION>"
+  access_key = var.access_key
+  secret_key = var.secret_key
+  region     = var.aws_region
   default_tags {
     tags = {
         Terraform   = "true"

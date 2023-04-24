@@ -22,7 +22,7 @@ jobs:
       - name: Interpolation
         run: |
           pwd
-          ls -la 
+          ls -la
           cd infrastructure
           ls -la
 
