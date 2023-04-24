@@ -41,7 +41,7 @@ jobs:
         with:
           terraform_version: 1.0.0
 
-      - name: Interp
+      - name: TERRAFORM
         shell: bash
         run: |
           cd infrastructure
