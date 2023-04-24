@@ -16,8 +16,8 @@ jobs:
       - name: Interpolation
         shell: bash
         run: |
-          rm -rf ~/.aws/credentials
-          rm -rf ~/.aws/config
+          #rm -rf ~/.aws/credentials
+          #rm -rf ~/.aws/config
           unset AWS_ACCESS_KEY_ID
           unset AWS_SECRET_ACCESS_KEY
           unset AWS_SESSION_TOKEN
