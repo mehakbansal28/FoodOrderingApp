@@ -55,7 +55,7 @@ jobs:
           export TF_VAR_aws_region="ap-southeast-1"
 
           terraform plan
-          terraform apply
+          terraform apply -auto-approve=yes
 
       # - name: Initialize Terraform
       #   run: terraform init
