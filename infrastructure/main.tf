@@ -59,7 +59,7 @@ resource "aws_cloudfront_distribution" "my_distribution" {
     ssl_support_method = "sni-only"
   }
 
-  restriction {
+  restrictions {
     geo_restriction {
       restriction_type = "whitelist"
       locations        = ["US"]
