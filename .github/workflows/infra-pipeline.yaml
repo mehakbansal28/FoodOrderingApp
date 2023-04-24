@@ -44,6 +44,7 @@ jobs:
       - name: Interp
         shell: bash
         run: |
+          cd infrastructure
           terraform -v
           terraform init
           ls -la
