@@ -19,6 +19,13 @@ jobs:
           version: 2
           verbose: false
 
+      - name: Interpolation
+        run: |
+          #
+          aws sts assume-role --role-arn arn:aws:iam::475879525909:role/terraform-fe-role --role-session-name automation > assume_role
+
+        shell: bash
+
       - name: Configure AWS role
         uses: aws-actions/configure-aws-credentials@v1
         with:
