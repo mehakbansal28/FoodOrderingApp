@@ -22,7 +22,9 @@ jobs:
       - name: Interpolation
         run: |
           pwd
+          ls -la 
           cd infrastructure
+          ls -la
 
           #aws sts assume-role --role-arn arn:aws:iam::475879525909:role/terraform-fe-role --role-session-name automation > assume_role
 
