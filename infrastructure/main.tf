@@ -19,19 +19,19 @@ provider "aws" {
   }
 }
 
-resource "aws_s3_bucket" "my_bucket" {
-  bucket = "angular-fe-bucket"
+resource "aws_s3_bucket" "angular_bucket" {
+  bucket = var.bucket_name
 }
 
 resource "aws_s3_bucket_object" "index_html" {
-  bucket = aws_s3_bucket.my_bucket.id
+  bucket = aws_s3_bucket.angular_bucket.id
   key = "index.html"
   source = "../dist/food-ordering-app/index.html"
 }
 
 resource "aws_cloudfront_distribution" "my_distribution" {
   origin {
-    domain_name = aws_s3_bucket.my_bucket.website_domain
+    domain_name = aws_s3_bucket.angular_bucket.website_domain
     origin_id = "my-bucket-origin"
   }
 
@@ -54,10 +54,10 @@ resource "aws_cloudfront_distribution" "my_distribution" {
     max_ttl = 31536000
   }
 
-  #viewer_certificate {
-  #  acm_certificate_arn = "my_certificate_arn"
-  #  ssl_support_method = "sni-only"
-  #}
+  viewer_certificate {
+    acm_certificate_arn = "my_certificate_arn"
+    ssl_support_method = "sni-only"
+  }
 
   #aliases = ["my-angular-frontend.example.com"]
 }
