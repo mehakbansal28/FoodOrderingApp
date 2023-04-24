@@ -29,6 +29,7 @@ resource "aws_s3_bucket_object" "index_html" {
   source = "../dist/food-ordering-app/index.html"
 }
 
+/*
 resource "aws_cloudfront_distribution" "my_distribution" {
   origin {
     domain_name = aws_s3_bucket.angular_bucket.website_domain
@@ -61,3 +62,4 @@ resource "aws_cloudfront_distribution" "my_distribution" {
 
   #aliases = ["my-angular-frontend.example.com"]
 }
+*/
