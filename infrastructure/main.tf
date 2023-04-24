@@ -19,21 +19,45 @@ provider "aws" {
   }
 }
 
-resource "aws_s3_bucket" "angular_bucket" {
-  bucket            = var.bucket_name
-  versioning {
-    enabled         = true
-  }
-  lifecycle {
-    prevent_destroy = true
-    rule {
-      id      = "expire-old-builds"
-      status  = "Enabled"
-      prefix  = "build/"
+resource "aws_s3_bucket" "my_bucket" {
+  bucket = "angular-fe-bucket"
+}
 
-      expiration {
-        days = 30
+resource "aws_s3_bucket_object" "index_html" {
+  bucket = aws_s3_bucket.my_bucket.id
+  key = "index.html"
+  source = "../dist/food-ordering-app/index.html"
+}
+
+resource "aws_cloudfront_distribution" "my_distribution" {
+  origin {
+    domain_name = aws_s3_bucket.my_bucket.website_domain
+    origin_id = "my-bucket-origin"
+  }
+
+  enabled = true
+
+  default_cache_behavior {
+    allowed_methods = ["GET", "HEAD"]
+    cached_methods = ["GET", "HEAD"]
+    target_origin_id = "my-bucket-origin"
+    forwarded_values {
+      query_string = false
+      cookies {
+        forward = "none"
       }
     }
+
+    viewer_protocol_policy = "redirect-to-https"
+    min_ttl = 0
+    default_ttl = 86400
+    max_ttl = 31536000
   }
+
+  #viewer_certificate {
+  #  acm_certificate_arn = "my_certificate_arn"
+  #  ssl_support_method = "sni-only"
+  #}
+
+  #aliases = ["my-angular-frontend.example.com"]
 }
