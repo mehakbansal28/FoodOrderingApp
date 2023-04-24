@@ -62,14 +62,15 @@ resource "aws_cloudfront_distribution" "my_distribution" {
   restrictions {
     geo_restriction {
       restriction_type = "whitelist"
-      locations        = ["US"]
-    }
-
-    ip_restriction {
-      # Replace with your own list of IP addresses
-      ip_address = ["192.0.2.0/24"]
+      locations        = ["US", "CA", "GB", "DE"]
     }
   }
 
-  #aliases = ["my-angular-frontend.example.com"]
+  tags = {
+    Environment = "production"
+  }
+
+  viewer_certificate {
+    cloudfront_default_certificate = true
+  }
 }
