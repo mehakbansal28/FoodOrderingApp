@@ -54,11 +54,6 @@ resource "aws_cloudfront_distribution" "my_distribution" {
     max_ttl = 31536000
   }
 
-  viewer_certificate {
-    acm_certificate_arn = "my_certificate_arn"
-    ssl_support_method = "sni-only"
-  }
-
   restrictions {
     geo_restriction {
       restriction_type = "whitelist"
