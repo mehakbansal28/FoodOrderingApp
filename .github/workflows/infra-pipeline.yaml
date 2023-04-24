@@ -41,13 +41,13 @@ jobs:
           terraform_version: 1.0.0
 
       - name: Initialize Terraform
-        run: terraform init ./infrastructure
+        run: terraform init -chdir ./infrastructure
 
       - name: Plan Terraform
-        run: terraform plan ./infrastructure
+        run: terraform plan -chdir ./infrastructure
 
       - name: Apply Terraform
-        run: terraform apply ./infrastructure
+        run: terraform apply -chdir ./infrastructure
         env:
           TF_VAR_bucket_name: fe-angular
           #TF_VAR_deployment_role: arn:aws:iam::475879525909:role/terraform-fe-role
