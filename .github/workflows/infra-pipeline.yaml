@@ -22,7 +22,9 @@ jobs:
       - name: Interpolation
         run: |
           #
-          aws sts assume-role --role-arn arn:aws:iam::475879525909:role/terraform-fe-role --role-session-name automation > assume_role
+          AWS_CLI_VERSION=$(aws --version 2>&1 | cut -d " " -f1 | cut -d "/" -f2)
+
+          #aws sts assume-role --role-arn arn:aws:iam::475879525909:role/terraform-fe-role --role-session-name automation > assume_role
 
         shell: bash
 
