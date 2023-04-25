@@ -42,7 +42,7 @@ jobs:
 
     - name: Interpolate environment variables
       shell: bash
-      id: interpolate
+      id: interp
       run: |
          pwd
          ls -la
