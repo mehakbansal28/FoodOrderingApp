@@ -24,16 +24,25 @@ resource "aws_s3_bucket" "angular_bucket" {
 }
 
 
-
+/*
 resource "aws_s3_bucket_object" "index_html" {
   bucket            = aws_s3_bucket.angular_bucket.id
   key               = "food-ordering-app"
-  source            = var.dist_source_path
+  source            = var.file_location
 
   # The filemd5() function is available in Terraform 0.11.12 and later
   # For Terraform 0.11.11 and earlier, use the md5() function and the file() function:
   # etag = "${md5(file("path/to/file"))}"
-  etag = filemd5(var.dist_source_path)
+  etag = filemd5(var.file_location)
+}
+*/
+
+resource "aws_s3_bucket_object" "index_html" {
+  count  = "${length(var.config) > 0 ? length(var.config) : "0" }"
+  key    = "config/${element(var.config, count.index)}"
+  source = "${var.file_location}${element(var.config, count.index)}"
+  bucket = "${aws_s3_bucket.bootstrap.id}"
+  acl    = "private"
 }
 
 /*
