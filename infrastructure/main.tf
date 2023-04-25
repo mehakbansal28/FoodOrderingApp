@@ -26,7 +26,7 @@ resource "aws_s3_bucket" "angular_bucket" {
 resource "aws_s3_bucket_object" "index_html" {
   bucket = aws_s3_bucket.angular_bucket.id
   key = "index.html"
-  source = "../dist/food-ordering-app/index.html"
+  source = "../dist/food-ordering-app/"
 }
 
 resource "aws_cloudfront_distribution" "my_distribution" {
