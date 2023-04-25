@@ -18,12 +18,13 @@ provider "aws" {
     }
   }
 }
-
+/*
 resource "aws_s3_bucket_object" "my_folder" {
   bucket = var.bucket_name
   key    = "dist/"
   content = base64encode(file("${var.file_location}"))
 }
+*/
 
 resource "null_resource" "sync_folder" {
   provisioner "local-exec" {
