@@ -7,8 +7,3 @@ variable "access_key" { }
 variable "secret_key" { }
 variable "aws_region" { }
 variable "file_location" {}
-
-variable config {
-  type    = "list"
-  default = []
-}
