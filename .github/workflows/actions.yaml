@@ -46,5 +46,5 @@ jobs:
       run: |
          pwd
          ls -la
-         cd /home/runner/work/FoodOrderingApp/FoodOrderingApp/Frontend/dist
+         cd /home/runner/work/FoodOrderingApp/FoodOrderingApp/Frontend/dist/food-ordering-app
          ls -la
