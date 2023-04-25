@@ -1,0 +1,73 @@
+name: ANGULAR:FE:INFRASTRUCTURE
+on:
+  push:
+    branches:
+      - main
+      - infra-pipeline
+
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - id: install-aws-cli
+        uses: unfor19/install-aws-cli-action@v1.0.3
+        with:
+          version: 2
+          verbose: false
+
+      - name: Interpolation
+        run: |
+          pwd
+          ls -la
+          cd infrastructure
+          ls -la
+
+          #aws sts assume-role --role-arn arn:aws:iam::475879525909:role/terraform-fe-role --role-session-name automation > assume_role
+
+        shell: bash
+
+      # - name: Configure AWS role
+      #   uses: aws-actions/configure-aws-credentials@v1
+      #   with:
+      #     aws-region: "us-east-1"
+      #     role-to-assume: "arn:aws:iam::475879525909:role/terraform-fe-role"
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: 1.0.0
+
+      - name: TERRAFORM
+        shell: bash
+        run: |
+          cd infrastructure
+          terraform -v
+          terraform init
+          ls -la
+
+          export TF_VAR_bucket_name="angular-fe-bucket"
+          export TF_VAR_access_key="${{ secrets.AWS_ACCESS_KEY_ID }}"
+          export TF_VAR_secret_key="${{ secrets.AWS_SECRET_ACCESS_KEY }}"
+          export TF_VAR_aws_region="ap-southeast-1"
+
+          terraform plan
+          terraform apply -auto-approve
+
+      # - name: Initialize Terraform
+      #   run: terraform init
+      #
+      # # - name: Plan Terraform
+      # #   run: terraform plan
+      #
+      # - name: Apply Terraform
+      #   run: terraform apply
+      #   env:
+      #     TF_VAR_bucket_name: fe-angular
+      #     #TF_VAR_deployment_role: arn:aws:iam::475879525909:role/terraform-fe-role
+      #     TF_VAR_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      #     TF_VAR_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      #     TF_VAR_aws_region: ap-southeast-1
