@@ -19,8 +19,10 @@ provider "aws" {
   }
 }
 
-resource "aws_s3_bucket" "angular_bucket" {
-  bucket            = var.bucket_name
+resource "aws_s3_bucket_object" "my_folder" {
+  bucket = var.bucket_name
+  key    = "dist/"
+  content = base64encode(file("${var.file_location}"))
 }
 
 
