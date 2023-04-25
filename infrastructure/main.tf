@@ -18,20 +18,21 @@ provider "aws" {
     }
   }
 }
-
+/*
 resource "aws_s3_bucket_object" "my_folder" {
   bucket = var.bucket_name
   key    = "dist/"
   content = base64encode(file("${var.file_location}"))
 }
+*/
 
-/*
+
 resource "null_resource" "sync_folder" {
   provisioner "local-exec" {
     command = "aws s3 cp ${var.file_location}/food-ordering-app s3://${var.bucket_name} --recursive"
   }
 }
-*/
+
 
 
 /*
