@@ -23,22 +23,26 @@ resource "aws_s3_bucket" "angular_bucket" {
   bucket            = var.bucket_name
 }
 
-resource "null_resource" "remove_and_upload_to_s3" {
-  provisioner "local-exec" {
-    command = "aws s3 sync var.dist_source_path s3://${aws_s3_bucket.angular_bucket.id}"
-  }
+
+
+resource "aws_s3_bucket_object" "index_html" {
+  bucket            = aws_s3_bucket.angular_bucket.id
+  key               = "food-ordering-app"
+  source            = var.dist_source_path
+  server_side_encryption = "AES256"
+  content_type          = "application/x-directory"
+
+  # Enable parallelism for multipart upload
+  etag_in_content_range_enabled = true
+  sse_algorithm                 = "AES256"
+  source_transparency           = "S3Inventory"
+  storage_class                 = "STANDARD_IA"
+
+  # Set the maximum size of a single part
+  multipart_chunksize = "64MB"
 }
 
 /*
-resource "aws_s3_bucket_object" "index_html" {
-  bucket            = aws_s3_bucket.angular_bucket.id
-  key               = "folder"
-  source            = var.dist_source_path
-  content_type      = "application/x-directory"
-
-}
-
-
 resource "aws_cloudfront_distribution" "my_distribution" {
   origin {
     domain_name = aws_s3_bucket.angular_bucket.website_domain
