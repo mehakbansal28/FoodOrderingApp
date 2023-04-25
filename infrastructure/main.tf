@@ -23,6 +23,13 @@ resource "aws_s3_bucket" "angular_bucket" {
   bucket            = var.bucket_name
 }
 
+resource "null_resource" "remove_and_upload_to_s3" {
+  provisioner "local-exec" {
+    command = "aws s3 sync var.dist_source_path s3://${aws_s3_bucket.angular_bucket.id}"
+  }
+}
+
+/*
 resource "aws_s3_bucket_object" "index_html" {
   bucket            = aws_s3_bucket.angular_bucket.id
   key               = "folder"
@@ -31,7 +38,7 @@ resource "aws_s3_bucket_object" "index_html" {
 
 }
 
-/*
+
 resource "aws_cloudfront_distribution" "my_distribution" {
   origin {
     domain_name = aws_s3_bucket.angular_bucket.website_domain
