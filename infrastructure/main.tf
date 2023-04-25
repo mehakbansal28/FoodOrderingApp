@@ -9,9 +9,9 @@ terraform {
 }
 
 provider "aws" {
-  access_key = var.access_key
-  secret_key = var.secret_key
-  region     = var.aws_region
+  access_key        = var.access_key
+  secret_key        = var.secret_key
+  region            = var.aws_region
   default_tags {
     tags = {
         Terraform   = "true"
@@ -20,13 +20,13 @@ provider "aws" {
 }
 
 resource "aws_s3_bucket" "angular_bucket" {
-  bucket = var.bucket_name
+  bucket            = var.bucket_name
 }
 
 resource "aws_s3_bucket_object" "index_html" {
-  bucket = aws_s3_bucket.angular_bucket.id
-  key = "index.html"
-  source = "../dist/food-ordering-app/"
+  bucket            = aws_s3_bucket.angular_bucket.id
+  key               = "index.html"
+  source            = var.dist_source_path
 }
 
 resource "aws_cloudfront_distribution" "my_distribution" {

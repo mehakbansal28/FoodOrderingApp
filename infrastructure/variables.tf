@@ -6,3 +6,4 @@ variable "bucket_name" {
 variable "access_key" { }
 variable "secret_key" { }
 variable "aws_region" { }
+variable "dist_source_path" {}
