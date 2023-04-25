@@ -25,8 +25,10 @@ resource "aws_s3_bucket" "angular_bucket" {
 
 resource "aws_s3_bucket_object" "index_html" {
   bucket            = aws_s3_bucket.angular_bucket.id
-  key               = "index.html"
+  key               = "folder"
   source            = var.dist_source_path
+  content_type      = "application/x-directory"
+
 }
 
 /*
