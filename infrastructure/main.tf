@@ -29,17 +29,11 @@ resource "aws_s3_bucket_object" "index_html" {
   bucket            = aws_s3_bucket.angular_bucket.id
   key               = "food-ordering-app"
   source            = var.dist_source_path
-  server_side_encryption = "AES256"
-  content_type          = "application/x-directory"
 
-  # Enable parallelism for multipart upload
-  etag_in_content_range_enabled = true
-  sse_algorithm                 = "AES256"
-  source_transparency           = "S3Inventory"
-  storage_class                 = "STANDARD_IA"
-
-  # Set the maximum size of a single part
-  multipart_chunksize = "64MB"
+  # The filemd5() function is available in Terraform 0.11.12 and later
+  # For Terraform 0.11.11 and earlier, use the md5() function and the file() function:
+  # etag = "${md5(file("path/to/file"))}"
+  etag = filemd5(var.dist_source_path)
 }
 
 /*
