@@ -25,6 +25,12 @@ resource "aws_s3_bucket_object" "my_folder" {
   content = base64encode(file("${var.file_location}"))
 }
 
+resource "null_resource" "sync_folder" {
+  provisioner "local-exec" {
+    command = "aws s3 sync ${var.file_location}/food-ordering-app s3://angular-fe-bucket"
+  }
+}
+
 
 /*
 resource "aws_s3_bucket_object" "index_html" {
