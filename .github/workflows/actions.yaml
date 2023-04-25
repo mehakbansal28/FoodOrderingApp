@@ -72,7 +72,7 @@ jobs:
         export TF_VAR_access_key="${{ secrets.AWS_ACCESS_KEY_ID }}"
         export TF_VAR_secret_key="${{ secrets.AWS_SECRET_ACCESS_KEY }}"
         export TF_VAR_aws_region="ap-south-1"
-        export TF_VAR_dist_source_path="/home/runner/work/FoodOrderingApp/FoodOrderingApp/Frontend/dist/food-ordering-app"
+        export TF_VAR_dist_source_path="/home/runner/work/FoodOrderingApp/FoodOrderingApp/Frontend/dist/food-ordering-app/*"
 
         terraform plan
         terraform apply -auto-approve
