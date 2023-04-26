@@ -16,7 +16,7 @@ export class FoodListComponent implements OnInit {
   foodList: FoodItem[] = [];
   cartItems: CartItem[] = [];
 
-  constructor(private foodService: FoodService,private cartService: CartService, private toastr: ToastrService) { }
+  constructor(private foodService: FoodService, private cartService: CartService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.getFoodItems();
@@ -25,30 +25,33 @@ export class FoodListComponent implements OnInit {
 
   getFoodItems(): void {
     this.foodService.getFoodItems()
-    .pipe(
-      map((foodItems: any[]) => {
-        return foodItems.map(item=> {
-          if (item.name.includes('Grilled Salmon')) {
-            item.imageUrl = './assets/grilled_salmon.jpg';
-          } if (item.name.includes('Caprese Salad')) {
-            item.imageUrl = './assets/caprese_salad.jfif';
-          }
-          return item;
-        });
-      }),
-      catchError(error => {
-        console.error(error);
-        return EMPTY;
-      })
-    )
-    .subscribe(
-      (foodItems: FoodItem[]) => {
-        this.foodList = foodItems;
-      },
-      (error: any) => {
-        console.error(error);
-      }
-    );
+      .pipe(
+        map((foodItems: any[]) => {
+          return foodItems.map(item => {
+            if (item.name.includes('Grilled Salmon')) {
+              item.imageUrl = './assets/grilled_salmon.jpg';
+            } else if (item.name.includes('Caprese Salad')) {
+              item.imageUrl = './assets/caprese_salad.jfif';
+            }
+            else {
+              item.imageUrl = './assets/food.png';
+            }
+            return item;
+          });
+        }),
+        catchError(error => {
+          console.error(error);
+          return EMPTY;
+        })
+      )
+      .subscribe(
+        (foodItems: FoodItem[]) => {
+          this.foodList = foodItems;
+        },
+        (error: any) => {
+          console.error(error);
+        }
+      );
   }
 
   addToCart(item: FoodItem): void {
@@ -59,8 +62,8 @@ export class FoodListComponent implements OnInit {
       const newItem: any = {
         id: item.id,
         name: item.name,
-        description:item.description,
-        type:item.type,
+        description: item.description,
+        type: item.type,
         price: item.price,
         quantity: 1,
       };
