@@ -61,7 +61,7 @@ jobs:
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         AWS_DEFAULT_REGION: us-east-1
         S3_BUCKET_NAME: my-s3-bucket
-      run: aws s3 sync /home/runner/work/FoodOrderingApp/FoodOrderingApp/Frontend/dist/food-ordering-app s3://fe-angular-orderingapp --delete --cache-control max-age=31536000,public
+      run: aws s3 sync /home/runner/work/FoodOrderingApp/FoodOrderingApp/Frontend/dist/food-ordering-app s3://fe-angular-orderingapp --acl public-read --delete --cache-control max-age=31536000,public
        #aws s3 sync dist s3://${{ env.S3_BUCKET_NAME }} --delete --cache-control max-age=31536000,public
     #
     #
@@ -73,25 +73,3 @@ jobs:
         CLOUDFRONT_DISTRIBUTION_ID: E1TYUO4EA9KMOE
       run: aws cloudfront create-invalidation --distribution-id E1TYUO4EA9KMOE --paths '/*'
         #aws cloudfront create-invalidation --distribution-id ${{ env.CLOUDFRONT_DISTRIBUTION_ID }} --paths '/*'
-
-    # - name: Setup Terraform
-    #   uses: hashicorp/setup-terraform@v1
-    #   with:
-    #     terraform_version: 1.0.0
-    #
-    # - name: ANGULAR:FE:DEPLOYMENT
-    #   shell: bash
-    #   run: |
-    #     cd infrastructure
-    #     terraform -v
-    #     terraform init
-    #     ls -la
-    #
-    #     export TF_VAR_bucket_name="fe-angular-orderingapp"
-    #     export TF_VAR_access_key="${{ secrets.AWS_ACCESS_KEY_ID }}"
-    #     export TF_VAR_secret_key="${{ secrets.AWS_SECRET_ACCESS_KEY }}"
-    #     export TF_VAR_aws_region="ap-south-1"
-    #     export TF_VAR_dist_source_path="/home/runner/work/FoodOrderingApp/FoodOrderingApp/Frontend/dist/"
-    #
-    #     terraform plan
-    #     terraform apply -auto-approve
