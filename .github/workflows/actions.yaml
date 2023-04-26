@@ -67,9 +67,9 @@ jobs:
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         AWS_DEFAULT_REGION: us-east-1
         S3_BUCKET_NAME: my-s3-bucket
-     run: |
+     run: aws s3 sync dist s3://fe-angular-orderingapp --delete --cache-control max-age=31536000,public
        #aws s3 sync dist s3://${{ env.S3_BUCKET_NAME }} --delete --cache-control max-age=31536000,public
-       aws s3 sync dist s3://fe-angular-orderingapp --delete --cache-control max-age=31536000,public
+
 
     - name: Invalidate CloudFront Cache
       env:
@@ -77,9 +77,8 @@ jobs:
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         AWS_DEFAULT_REGION: us-east-1
         CLOUDFRONT_DISTRIBUTION_ID: E1TYUO4EA9KMOE
-      run: |
+      run: aws cloudfront create-invalidation --distribution-id E1TYUO4EA9KMOE --paths '/*'
         #aws cloudfront create-invalidation --distribution-id ${{ env.CLOUDFRONT_DISTRIBUTION_ID }} --paths '/*'
-        aws cloudfront create-invalidation --distribution-id E1TYUO4EA9KMOE --paths '/*'
 
     # - name: Setup Terraform
     #   uses: hashicorp/setup-terraform@v1
