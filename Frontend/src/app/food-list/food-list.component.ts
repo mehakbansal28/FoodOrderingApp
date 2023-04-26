@@ -4,31 +4,51 @@ import { FoodItem } from '../shared/models/food-item.model';
 import { CartService } from '../shared/services/cart.service';
 import { FoodService } from '../shared/services/food.service';
 import { ToastrService } from 'ngx-toastr';
-
+import { catchError, map } from 'rxjs/operators';
+import { EMPTY } from 'rxjs';
 @Component({
   selector: 'app-food-list',
   templateUrl: './food-list.component.html',
   styleUrls: ['./food-list.component.scss']
 })
+
 export class FoodListComponent implements OnInit {
-
-  foodList: FoodItem[] = [
-    { id: 1, name: "Pizza", description: "Delicious pizza with all your favorite toppings!", price: 9.99,  imageUrl: './assets/pizza.jpg' },
-    { id: 2, name: "Burger", description: "Juicy burger with all the fixings!", price: 6.99 ,  imageUrl: './assets/burger.jpg'},
-    { id: 3, name: "Fries", description: "Crispy fries with your choice of dipping sauce.", price: 3.99,  imageUrl: './assets/fries.jpg' },
-    { id: 4, name: "Samosa", description: "Crispy and savory triangular pastry filled with spiced vegetables!", price: 2.99,  imageUrl: './assets/samosa.jpg' },
-    { id: 5, name: "Dosa", description: "Savory,Crispy made from fermented rice,with delicious chutneys and sambar.", price: 16.99 ,  imageUrl: './assets/dosa.jpg'},
-    { id: 6, name: "Dhokla", description: "Fluffy and spongy Gujarati snack made from fermented batter!", price: 7.99,  imageUrl: './assets/dhokla.jfif' }
-  ];
+  foodList: FoodItem[] = [];
   cartItems: CartItem[] = [];
-  foodItems: FoodItem[] = [];
 
-  constructor(private foodService: FoodService, private cartService: CartService,private toastr: ToastrService) { }
-
+  constructor(private foodService: FoodService,private cartService: CartService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
+    this.getFoodItems();
     this.cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
-   // this.foodItems = this.foodService.getFoodItems();
+  }
+
+  getFoodItems(): void {
+    this.foodService.getFoodItems()
+    .pipe(
+      map((foodItems: any[]) => {
+        return foodItems.map(item=> {
+          if (item.name.includes('Grilled Salmon')) {
+            item.imageUrl = './assets/grilled_salmon.jpg';
+          } if (item.name.includes('Caprese Salad')) {
+            item.imageUrl = './assets/caprese_salad.jfif';
+          }
+          return item;
+        });
+      }),
+      catchError(error => {
+        console.error(error);
+        return EMPTY;
+      })
+    )
+    .subscribe(
+      (foodItems: FoodItem[]) => {
+        this.foodList = foodItems;
+      },
+      (error: any) => {
+        console.error(error);
+      }
+    );
   }
 
   addToCart(item: FoodItem): void {
@@ -39,24 +59,14 @@ export class FoodListComponent implements OnInit {
       const newItem: any = {
         id: item.id,
         name: item.name,
+        description:item.description,
+        type:item.type,
         price: item.price,
         quantity: 1,
-      //  foodItem: []
       };
       this.cartItems.push(newItem);
     }
     localStorage.setItem('cartItems', JSON.stringify(this.cartItems));
-    this.toastr.success('You can add more items.', `HURRAH...! ${item.name} Added`);
+    this.toastr.success(`HURRAH...! ${item.name} Added`, 'You can add more items.');
   }
-
-
-  // addToCart(foodItem: FoodItem) {
-  //   const cartItem: CartItem = {
-  //     foodItem: foodItem,
-  //     quantity: 1
-  //   };
-  //   this.cartService.addToCart(cartItem);
-  //   window.alert('The item has been added to your cart!');
-  // }
-
 }

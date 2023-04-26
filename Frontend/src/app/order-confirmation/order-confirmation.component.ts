@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-
 @Component({
   selector: 'app-order-confirmation',
   template: `
@@ -17,7 +16,6 @@ import { Router } from '@angular/router';
     .bg-light {
       background-color: #f8f9fa;
     }
-
     h1 {
       font-size: 4rem;
       font-weight: bold;
@@ -25,22 +23,20 @@ import { Router } from '@angular/router';
       text-shadow: 2px 2px #000000;
       margin-top:70px;
     }
-
     p {
       font-size: 1.5rem;
       margin-bottom: 50px;
       color: #000000;
     }
-
     strong {
       font-weight: bold;
       color: #007bff;
     }
   `]
 })
+
 export class OrderConfirmationComponent implements OnInit {
   orderId: string;
-
   constructor(private router: Router) {
     const navigation = this.router.getCurrentNavigation();
     this.orderId = navigation?.extras?.state?.orderId;

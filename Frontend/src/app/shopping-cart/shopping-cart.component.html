@@ -33,7 +33,7 @@
       <div class="card-footer">
         <div class="d-flex justify-content-between align-items-center">
           <div class="cart-total">
-            <div class="h5">Total: {{ totalPrice | currency }}</div>
+            <div class="h5">Total: {{  getTotalPrice() | currency }}</div>
           </div>
           <div class="cart-buttons">
             <button class="btn btn-outline-secondary" (click)="clearCart()">Clear Cart</button>
