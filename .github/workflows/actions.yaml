@@ -1,9 +1,12 @@
 name: Angular 12 Build
 on:
   push:
-    branches:
-      - main
-      - actions-pipeline
+
+env:
+  AWS_REGION: "ap-south-1"
+  S3_BUCKET_NAME: "fe-angular-orderingapp"
+  CLOUDFRONT_DISTRIBUTION_ID: "E1TYUO4EA9KMOE"
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -22,15 +25,6 @@ jobs:
     - name: Install Dependencies
       run: npm i --prefix ./Frontend
 
-    - name: Interpolate environment variables
-      shell: bash
-      id: interpolate
-      run: |
-         pwd
-         ls -la
-         cd /home/runner/work/FoodOrderingApp/FoodOrderingApp/Frontend
-         ls -la
-
     - name: Build
       run: npm run build-dev --prefix /home/runner/work/FoodOrderingApp/FoodOrderingApp/Frontend
 
@@ -39,15 +33,6 @@ jobs:
       with:
         name: dist
         path: dist
-
-    - name: Interpolate environment variables
-      shell: bash
-      id: interp
-      run: |
-         pwd
-         ls -la
-         cd /home/runner/work/FoodOrderingApp/FoodOrderingApp/Frontend/dist/food-ordering-app
-         ls -la
 
     - name: Install AWS CLI
       run: |
@@ -59,17 +44,17 @@ jobs:
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        AWS_DEFAULT_REGION: us-east-1
-        S3_BUCKET_NAME: my-s3-bucket
-      run: aws s3 sync /home/runner/work/FoodOrderingApp/FoodOrderingApp/Frontend/dist/food-ordering-app s3://fe-angular-orderingapp --acl public-read --delete --cache-control max-age=31536000,public
+        AWS_DEFAULT_REGION: ${{ env.AWS_REGION }}
+        S3_BUCKET_NAME: ${{ env.S3_BUCKET_NAME }}
+      run: |
+        aws s3 sync /home/runner/work/FoodOrderingApp/FoodOrderingApp/Frontend/dist/food-ordering-app s3://${{ env.S3_BUCKET_NAME }} --acl public-read --delete --cache-control max-age=31536000,public
        #aws s3 sync dist s3://${{ env.S3_BUCKET_NAME }} --delete --cache-control max-age=31536000,public
-    #
-    #
+
     - name: Invalidate CloudFront Cache
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        AWS_DEFAULT_REGION: ap-south-1
-        CLOUDFRONT_DISTRIBUTION_ID: E1TYUO4EA9KMOE
-      run: aws cloudfront create-invalidation --distribution-id E1TYUO4EA9KMOE --paths '/*'
-        #aws cloudfront create-invalidation --distribution-id ${{ env.CLOUDFRONT_DISTRIBUTION_ID }} --paths '/*'
+        AWS_DEFAULT_REGION: ${{ env.AWS_REGION }}
+        CLOUDFRONT_DISTRIBUTION_ID: ${{ env.CLOUDFRONT_DISTRIBUTION_ID }}
+      run: |
+        aws cloudfront create-invalidation --distribution-id ${{ env.CLOUDFRONT_DISTRIBUTION_ID }} --paths '/*'
