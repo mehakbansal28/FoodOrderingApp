@@ -2,12 +2,11 @@
   "name": "food-ordering-app",
   "version": "0.0.0",
   "scripts": {
-    "ng": "ng",
     "build-dev": "ng build --configuration production",
     "test": "ng test --code-coverage --watch=false",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "start": "ng serve",
+    "serve-dev": "ng serve --baseHref=/foodordering/ui/ --port 4200 --watch=false",
     "ngcc": "ngcc",
     "build": "ng test --code-coverage --watch=false && ng build --configuration production"
   },

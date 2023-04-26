@@ -51,20 +51,9 @@ module.exports = function (config) {
      colors: true,
      logLevel: config.LOG_INFO,
      autoWatch: true,
-     // browsers: ['ChromeHeadless'],
-     // browsers: ['PhantomJS'],
      browserDisconnectTimeout: 10000,
      browserDisconnectTolerance: 3,
      browserNoActivityTimeout: 60000,
-     // customLaunchers: {
-     //   Headless_Chrome: {
-     //     base: 'Chrome',
-     //     flags: [
-     //       '--no-sandbox',
-     //       '--disable-gpu',
-     //       '--disable-web-security'
-     //     ]
-     //   }},
      browsers: ['ChromeHeadlessNoSandbox'],
      customLaunchers: {
        ChromeHeadlessNoSandbox: {
