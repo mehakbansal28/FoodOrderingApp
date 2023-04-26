@@ -48,7 +48,6 @@ jobs:
         S3_BUCKET_NAME: ${{ env.S3_BUCKET_NAME }}
       run: |
         aws s3 sync /home/runner/work/FoodOrderingApp/FoodOrderingApp/Frontend/dist/food-ordering-app s3://${{ env.S3_BUCKET_NAME }} --acl public-read --delete --cache-control max-age=31536000,public
-       #aws s3 sync dist s3://${{ env.S3_BUCKET_NAME }} --delete --cache-control max-age=31536000,public
 
     - name: Invalidate CloudFront Cache
       env:
