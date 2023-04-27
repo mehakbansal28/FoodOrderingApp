@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class OrderService {
-  private apiUrl = 'http://ec2-13-235-114-103.ap-south-1.compute.amazonaws.com:8080/orders';
+  private apiUrl = 'https://ec2-13-235-114-103.ap-south-1.compute.amazonaws.com:8443/orders';
 
   constructor(private http: HttpClient) { }
 

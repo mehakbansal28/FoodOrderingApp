@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root',
 })
 export class FoodService {
-  private endPoint = 'http://ec2-13-235-114-103.ap-south-1.compute.amazonaws.com:8080';
+  private endPoint = 'https://ec2-13-235-114-103.ap-south-1.compute.amazonaws.com:8443';
 
   constructor(private http: HttpClient) {}
 
