@@ -5,16 +5,30 @@ import { FoodService } from './food.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { OrderService } from './order.service';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class CartService {
+  addToCart(item: CartItem): void {
+    const existingItem = this.cartItems.find(i => i.id === item.id);
+    if (existingItem) {
+      existingItem.quantity += item.quantity;
+    } else {
+      this.cartItems.push(item);
+    }
+    localStorage.setItem('cartItems', JSON.stringify(this.cartItems));
+    this.cartItemsSubject.next(this.cartItems);
+  }
 
   private items: CartItem[] = [];
   private cartItems: CartItem[] = [];
   private apiUrl = 'http://localhost:3000';
+ 
+  private cartItemsSubject: BehaviorSubject<CartItem[]> = new BehaviorSubject<CartItem[]>([]);
+  updateCartItems: any;
 
   constructor(private orderService: OrderService,private foodService: FoodService, private http: HttpClient, private router: Router, private toastr: ToastrService) { }
 
@@ -22,6 +36,9 @@ export class CartService {
     return this.items;
   }
 
+  getCartItems(): Observable<CartItem[]> {
+    return this.cartItemsSubject.asObservable();
+  }
   clearCart() {
     this.items = [];
     localStorage.removeItem('cartItems');
@@ -47,4 +64,12 @@ export class CartService {
       }
     })
   }
+  getCartItemCount(): number {
+    let count = 0;
+    for (const item of this.cartItems) {
+      count += item.quantity;
+    }
+    return count;
+  }
+ 
 }

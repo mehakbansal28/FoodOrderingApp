@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CartService } from '../shared/services/cart.service';
+import { CartItem } from '../shared/models/cart-item.model';
 
 @Component({
   selector: 'app-navbar',
@@ -7,7 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
   title = 'Food Ordering App';
-  constructor() {}
+  cartItemCount: number = 0;
+  constructor(private cartService: CartService) {}
+  ngOnInit(): void {
+    console.log('NavbarComponent initialized');
 
-  ngOnInit(): void {}
+    this.cartService.getCartItems().subscribe((items: CartItem[]) => {
+      console.log('Cart items:', items);
+      this.cartItemCount = items.length;
+      console.log('Cart item count:', this.cartItemCount);
+    });
+  }
+  
+
+
 }

@@ -1,9 +1,15 @@
+<!-- <div style="margin-top: -10px; z-index: 999;"><input [(ngModel)]="name" type="text"  placeholder="Say something..."> 
+
+<button (click)="Search()">Search</button></div> -->
 <div class="container mt-5">
+  
   <div class="card-container">
     <div class="col-md-4" *ngFor="let item of foodList">
+      
       <div class="card mb-3">
         <img class="card-img-top" [src]="item.imageUrl" alt="{{item.name}} image">
         <div class="card-body">
+          
           <h5 class="card-title text-center">{{ item.name }}</h5>
           <p class="card-text text-center">{{ item.description }}</p>
           <p class="card-text text-center">{{ item.price | currency }}</p>
