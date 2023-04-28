@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root',
 })
 export class FoodService {
-  private endPoint = 'https://a.mypoc.in';
+  private endPoint = 'https://13.235.114.103.nip.io';
 
   constructor(private http: HttpClient) {}
 
