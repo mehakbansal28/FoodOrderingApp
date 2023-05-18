@@ -11,6 +11,6 @@ export class FoodService {
   constructor(private http: HttpClient) {}
 
   getFoodItems(): Observable<FoodItem[]> {
-    return this.http.get<FoodItem[]>(this.endPoint+'/api/menu');
+    return this.http.get<FoodItem[]>(this.endPoint + '/api/menu');
   }
 }
