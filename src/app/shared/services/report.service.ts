@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class ReportService {
   private endPoint =
-    'http://ec2-13-235-114-103.ap-south-1.compute.amazonaws.com:8443';
+    'https://13.235.114.103.nip.io';
 
   constructor(private http: HttpClient) {}
 
