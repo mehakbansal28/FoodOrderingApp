@@ -49,6 +49,9 @@
             </tr>
           </tbody>
         </table>
+        <div class="empty-cart-message mx-2" style="text-align: center;" *ngIf="cartItems.length <= 0">
+         Your cart is empty.
+          </div>
       </div>
       <div class="card-footer">
         <div class="d-flex justify-content-between align-items-center">
@@ -56,12 +59,8 @@
             <div class="h5">Total: {{ getTotalPrice() | currency }}</div>
           </div>
           <div class="cart-buttons">
-            <button class="btn btn-outline-secondary" (click)="clearCart()">
-              Clear Cart
-            </button>
-            <button class="btn btn-primary" (click)="checkoutCart()">
-              Place Order
-            </button>
+            <button class="btn btn-outline-secondary" (click)="clearCart()" [disabled]="cartItems.length === 0">Clear Cart</button>
+            <button class="btn btn-primary" (click)="checkoutCart()" [disabled]="cartItems.length === 0">Place Order</button>
           </div>
         </div>
       </div>
