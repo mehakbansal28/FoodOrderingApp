@@ -1,0 +1,58 @@
+@import "~bootstrap/dist/css/bootstrap.min.css";
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.col-md-4 {
+  flex-basis: calc(33.33% - 10px);
+  margin-bottom: 20px;
+}
+.card-img-top {
+  height: 200px;
+  object-fit: cover;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+#offerCarousel {
+  height: 400px; /* Adjust the height as necessary */
+}
+
+.carousel-item {
+  height: 300px; /* Adjust the height as necessary */
+}
+
+.carousel-item img {
+  height: 100%;
+  object-fit: cover;
+}
+
+.carousel-caption {
+  top: 50%;
+  transform: translateY(-50%);
+  color: #fff;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 2rem;
+}
+
+.rating .fa-star.checked {
+  color: gold;
+}
+
+.description {
+  min-height: 72px;
+}
+.search-icon{
+  position: absolute;
+  right: 180px;
+  top: 80px;
+  z-index: 1; 
+
+}
+
+
+
+
+

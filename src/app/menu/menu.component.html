@@ -1,0 +1,54 @@
+<div class="container my-3">
+  <div class="d-flex justify-content-end align-items-center my-2 mx-1">
+    <!-- <div class="d-flex align-items-center ms-auto">
+      <form class="d-flex">
+        <input class="form-control me-2" [(ngModel)]="name" type="text"
+          placeholder="Search something..."
+        />
+
+        <button  (click)="Search()"><span class="fa fa-search"></span></button>
+      </form>
+    </div> -->
+    <!-- <div class="dropdown">
+      <button
+        class="btn btn-outline-secondary dropdown-toggle"
+        type="button"
+        id="sortDropdown"
+        data-bs-toggle="dropdown"
+        aria-expanded="false"
+      >
+        Sort by
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="sortDropdown">
+        <li><a class="dropdown-item" (click)="sortByName()">Name</a></li>
+        <li><a class="dropdown-item" (click)="sortByPrice()">Price</a></li>
+  
+      </ul>
+    </div> -->
+  </div>
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    <div class="col col-lg-4 col-md-6 col-sm-12" *ngFor="let item of foodList">
+      <div class="card h-100">
+        <img
+          class="card-img-top"
+          [src]="item.imageUrl"
+          alt="{{ item.name }} image"
+        />
+        <div class="card-body">
+          <h5 class="card-title text-center">{{ item.name }}</h5>
+          <p class="card-text text-center description">
+            {{ item.description }}
+          </p>
+          <p class="card-text text-center">{{ item.price | currency }}</p>
+         
+          <button
+            class="btn btn-primary d-block mx-auto"
+            (click)="addToCart(item)"
+          >
+            Add to Cart
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
